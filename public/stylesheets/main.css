@@ -49,7 +49,7 @@ ul.tabs {
   border-bottom:none;
   overflow: auto;
 }
-ul.tabs li { float: left; }
+ul.tabs li { float: left; margin-right: 10px; }
 /* Deals */
 #deals {
 

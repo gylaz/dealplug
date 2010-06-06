@@ -3,7 +3,9 @@ class CreateDeals < ActiveRecord::Migration
     create_table :deals do |t|
       t.string :title
       t.string :url
+      t.float  :price
       t.string :description
+      t.integer :points
       t.timestamps
     end
   end

@@ -1,21 +1,15 @@
-<h1>Listing deals</h1>
+<ul class="tabs">
+  <li><%= link_to "Popular deals", popular_path %></li>
+  <li><%= link_to "Latest deals", latest_path %></li>
+</ul>
 
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
+<table id="deals">
 <% @deals.each do |deal| %>
-  <tr>
-    <td><%= link_to 'Show', deal %></td>
-    <td><%= link_to 'Edit', edit_deal_path(deal) %></td>
-    <td><%= link_to 'Destroy', deal, :confirm => 'Are you sure?', :method => :delete %></td>
+  <tr class="<%= cycle('odd', 'even') %>">
+    <td class="vote"><%= link_to "Up", "/"%> | <%= link_to "Down", "/" %></td>
+    <td class="price"><%= number_to_currency(deal.price) %></td>
+    <td class="title"><%= link_to deal.title, deal %></td>
+    <td class="ago"><%=submitted_ago(deal) %></td>
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Deal', new_deal_path %>
