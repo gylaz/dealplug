@@ -1,4 +1,6 @@
 Dealplug::Application.routes.draw do |map|
+  devise_for :users
+
   resources :deals
   
   match "latest" => "deals#index?latest=true", :as => :latest

@@ -1,6 +1,6 @@
 class DealsController < ApplicationController
-  # GET /deals
-  # GET /deals.xml
+  
+  
   def index
     @deals = Deal.all
 

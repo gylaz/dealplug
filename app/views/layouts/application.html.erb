@@ -14,9 +14,16 @@
     <h1 class="tagline">Find and submit best online shopping deals</h1>
   </div>
   <div id="nav">
-    <%= link_to 'Plug a Deal', new_deal_path, :id => "plug_a_deal" %> |
-    <%= link_to 'Login', "/" %>
+    <%= link_to 'Plug a Deal', new_deal_path, :id => "plug_a_deal" %>
+    
+    <% if user_signed_in? %>
+      <%= current_user.username %> | <%= link_to "Sign out", destroy_user_session_path %>
+    <% else %>
+      <%= link_to "Sing up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
+    <% end %>
   </div>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
   <%= yield %>
 </div>
 </body>

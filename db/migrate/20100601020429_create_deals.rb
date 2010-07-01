@@ -5,7 +5,8 @@ class CreateDeals < ActiveRecord::Migration
       t.string :url
       t.float  :price
       t.string :description
-      t.integer :points
+      t.integer :points, :default => 1
+      t.integer :user_id
       t.timestamps
     end
   end
