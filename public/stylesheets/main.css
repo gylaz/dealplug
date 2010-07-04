@@ -20,7 +20,7 @@ h1.tagline {
   right:10px;
 }
 
-.even { background-color: #F2F2F2; }
+.even { background-color: #eee; }
 
 /* Forms */
 form label { font-weight: bold; }
@@ -53,6 +53,6 @@ ul.tabs li { float: left; margin-right: 10px; }
   border:1px solid #aaa;
 }
 #deals td { padding: 3px; }
-#deals .vote { width: 80px; }
+#deals .vote { width: 120px; }
 #deals .price { width: 60px; }
-#deals .ago { width: 100px; }
+#deals .ago { width: 140px; font-size: 11px; }

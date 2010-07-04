@@ -6,10 +6,10 @@
 <table id="deals">
 <% @deals.each do |deal| %>
   <tr class="<%= cycle('odd', 'even') %>">
-    <td class="vote"><%= link_to "Up", "/"%> | <%= link_to "Down", "/" %></td>
+    <td class="vote"><%= deal.points %><%= link_to "Up", "/"%>  <%= link_to "Down", "/" %></td>
     <td class="price"><%= number_to_currency(deal.price) %></td>
     <td class="title"><%= link_to deal.title, deal %></td>
-    <td class="ago"><%=submitted_ago(deal) %></td>
+    <td class="ago"><%= submitted_ago(deal) %></td>
   </tr>
 <% end %>
 </table>

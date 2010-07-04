@@ -4,8 +4,22 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+one:
+  title: Logitech Gaming Keysboard
+  price: 25
+  url: http://www.amazon.com
+  description: Amazon Exclusive deal. Probably won't last long.
+  user: admin
+two:
+  title: iPod Touch 2nd Gen
+  price: 145
+  url: http://www.buy.com
+  description: These are older generation but at a great price.
+  user: admin
+  points: 999
+three:
+  title: 'StarCraft 2: Wings of Liberty'
+  price: 43
+  url: http://www.gamespot.com
+  description: Cheapest price I've found anywhere else. You have to sign-up for their mailing list.
+  user: greg
