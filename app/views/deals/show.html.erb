@@ -1,5 +1,11 @@
 <p class="notice"><%= notice %></p>
+<div id="deal">
+  <h1><%= @deal.title %></h1>
+  <p><%= @deal.price %></p>
+  <p><%= @deal.url %></p>
+  <p><%= @deal.description %></p>
+  <p><%= @deal.user.username %></p>
+</div>
 
-
-<%= link_to 'Edit', edit_deal_path(@deal) %> |
-<%= link_to 'Destroy', @deal, :confirm => 'Are you sure?', :method => :delete %>
+<%= link_to('Edit', edit_deal_path(@deal)) if can? :update, @deal %>
+<%= link_to('Destroy', @deal, :confirm => 'Are you sure?', :method => :delete) if can? :destroy, @deal %>

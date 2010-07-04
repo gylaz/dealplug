@@ -14,12 +14,14 @@ class DealsController < ApplicationController
   end
 
   def new
+    @deal.url = "http://"
   end
 
   def edit
   end
-
+  
   def create
+    @deal.user = current_user
     if @deal.save
       redirect_to(@deal, :notice => 'Deal was successfully created.')
     else

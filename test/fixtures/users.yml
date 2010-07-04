@@ -10,7 +10,7 @@ admin:
   encrypted_password: $2a$10$yqgRxunskxvuIpP8uLMKNuIvLp70u0tECblNRZhtEggjfuVNffWxm
   password_salt: $2a$10$yqgRxunskxvuIpP8uLMKNu
 user1:
-  username: greg
-  email: greg@example.com
+  username: user
+  email: user1@example.com
   encrypted_password: $2a$10$yqgRxunskxvuIpP8uLMKNuIvLp70u0tECblNRZhtEggjfuVNffWxm
   password_salt: $2a$10$yqgRxunskxvuIpP8uLMKNu

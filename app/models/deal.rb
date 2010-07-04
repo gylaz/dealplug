@@ -10,4 +10,11 @@ class Deal < ActiveRecord::Base
   scope :popular, :order => "points"
   
   attr_accessible :title, :price, :url, :description
+  before_validation :format_url
+  
+  def format_url
+    unless url.blank? or url.starts_with?("http://") or url.starts_with?("https://")
+      self.url = "http://" + url
+    end
+  end
 end
