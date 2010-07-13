@@ -4,6 +4,8 @@ class DealsController < ApplicationController
   
   def index
     @deals = Deal.latest.popular
+    puts Vote.count
+    p Vote.all
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @deals }

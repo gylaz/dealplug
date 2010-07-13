@@ -1,4 +1,6 @@
 Dealplug::Application.routes.draw do |map|
+  resources :votes
+
   devise_for :users
 
   resources :deals

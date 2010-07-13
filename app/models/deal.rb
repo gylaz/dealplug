@@ -1,5 +1,6 @@
 class Deal < ActiveRecord::Base
   belongs_to :user
+  has_many :votes
   validates :user, :presence => true
   validates :title, :presence => true
   validates :price, :presence => true
@@ -16,5 +17,9 @@ class Deal < ActiveRecord::Base
     unless url.blank? or url.starts_with?("http://") or url.starts_with?("https://")
       self.url = "http://" + url
     end
+  end
+  
+  def user_vote(user)
+    votes.find_by_user_id(current_user.id) if user
   end
 end
