@@ -12,4 +12,8 @@ class User < ActiveRecord::Base
   def admin?
     admin
   end
+  
+  def recalculate_points    
+    update_attribute(:points, deals.sum(:points))
+  end
 end

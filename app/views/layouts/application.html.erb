@@ -14,9 +14,13 @@
     <h1 class="tagline">Find and share best online shopping deals</h1>
   </div>
   <div id="nav">
-    <%= link_to 'Plug a Deal', new_deal_path, :id => "plug_a_deal" %>
-    
+    <ul class="tabs">
+      <li><%= link_to "Popular deals", root_path %></li>
+      <!--li><%= link_to "Latest deals", latest_path %></li-->
+    </ul>
+
     <% if user_signed_in? %>
+      <%= link_to 'Submit a deal', new_deal_path, :id => "submit_deal" %>
       [<%= current_user.points %>] <%= current_user.username %> |
       <%= link_to "Sign out", destroy_user_session_path %>
     <% else %>

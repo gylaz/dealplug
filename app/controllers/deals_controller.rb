@@ -3,9 +3,7 @@ class DealsController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @deals = Deal.latest.popular
-    puts Vote.count
-    p Vote.all
+    @deals = Deal.recent.popular  
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @deals }
@@ -24,6 +22,7 @@ class DealsController < ApplicationController
   
   def create
     @deal.user = current_user
+    @deal.points = 1
     if @deal.save
       redirect_to(@deal, :notice => 'Deal was successfully created.')
     else

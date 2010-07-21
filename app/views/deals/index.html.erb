@@ -1,30 +1,29 @@
-<ul class="tabs">
-  <li><%= link_to "Popular deals", popular_path %></li>
-  <li><%= link_to "Latest deals", latest_path %></li>
-</ul>
-
 <table id="deals">
 <% @deals.each do |deal| %>
-  <tr class="<%= cycle('odd', 'even') %>">
+  <tr>
     <td class="vote">
-      <%= deal.points %>
       <% vote = deal.user_vote(current_user) %>
       <% if vote %>
         <% if vote.up %>
-          <%= link_to "Up.", new_vote_path(vote), :method => :put %>
-          <%= link_to "Down", new_vote_path(vote), :method => :put %>
-        <% else %>
-          <%= link_to "Up", new_vote_path(vote), :method => :put %>
-          <%= link_to "Down.", new_vote_path(vote), :method => :put %>
+          <p class="voted_up"></p>
+          <%= link_to "", vote, :method => :put, :class => "vote_down" %>
+        <% else%>
+          <%= link_to "", vote, :method => :put, :class => "vote_up" %>
+          <p class="voted_down"></p>
         <% end %>
       <% else %>
-        <%= link_to "Up", votes_path(Vote.new, :deal_id => deal.id, :up => true), :method => :post %>
-        <%= link_to "Down", votes_path(Vote.new, :deal_id => deal.id, :up => false), :method => :post %>
+        <%= link_to "", votes_path(Vote.new, :deal_id => deal.id, :up => true),
+          :method => :post, :class => "vote_up" %>
+        <%= link_to "", votes_path(Vote.new, :deal_id => deal.id, :up => false),
+          :method => :post, :class => "vote_down" %>
       <% end %>
     </td>
+    <td class="points"><%= deal.points %></td>
     <td class="price"><%= number_to_currency(deal.price) %></td>
-    <td class="title"><%= link_to deal.title, deal %></td>
-    <td class="ago"><%= submitted_ago(deal) %></td>
+    <td class="title">
+      <p><%= link_to deal.title, deal %></p>
+      <p class="small_text">Plugged by: <%= deal.user.username %> at <%= submitted_ago(deal) %></p>
+    </td>
   </tr>
 <% end %>
 </table>
