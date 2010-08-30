@@ -3,7 +3,11 @@ class DealsController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @deals = Deal.recent.popular  
+    if params[:popular]
+      @deals = Deal.popular.paginate(:page => params[:page], :per_page => 20)
+    else
+      @deals = Deal.latest.paginate(:page => params[:page], :per_page => 20)
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @deals }

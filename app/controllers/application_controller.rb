@@ -3,6 +3,6 @@ class ApplicationController < ActionController::Base
   layout 'application'
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = exception.message
-    redirect_to new_user_session_path
+    redirect_to user_session_new_path
   end
 end

@@ -11,7 +11,7 @@ class Ability
       can :create, Deal
       can :update, Deal, :user_id => user.id
       can :destroy, Deal, :user_id => user.id
-      can :manage, Vote
+      can :create, Vote
     end
   end
 

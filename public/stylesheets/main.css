@@ -14,20 +14,23 @@ a { text-decoration: none;}
   margin:20px auto;
 }
 
-h1.tagline {
+#tagline {
   position:absolute;
+  font-size: 20px;
   top:20px;
   right:10px;
   color: #666;
 }
 .small_text { font-size: 11px;}
+.pagination { margin-top: 5px; }
 /* Forms */
-form label { font-weight: bold; }
+form {margin-top: 20px;}
+form label {font-size: 14px; font-weight:bold;}
+
 
 /* Navigation */
 #nav {
   padding: 5px 10px;
-  /* background-color: #CCE6FF; */
   background-color: #eee;
   border:1px solid #ddd;
   text-align: right;
@@ -38,12 +41,11 @@ form label { font-weight: bold; }
 }
 
 /* Tabs */
-ul.tabs {
-  float: left;
-}
+ul.tabs { float: left; }
 ul.tabs li {
   float: left;
-  margin-right: 10px;
+  padding: 0 5px;
+  border-right: 1px solid #000;
 }
 
 #submit_deal {margin-right: 10px;}
@@ -51,20 +53,23 @@ ul.tabs li {
 #deals {
   width: 100%;
 }
-#deals td { padding: 3px; vertical-align:middle; border-bottom: 1px dashed #aaa;}
+#deals td { padding: 2px; vertical-align:middle; border-bottom: 1px dashed #aaa;}
 #deals td a {text-decoration: none;}
-#deals .vote { width: 15px; }
-#deals .points { width: 40px; font-weight: bold; text-align:center;}
-#deals .price { width: 60px; }
+#deals td.action { width: 16px; }
+#deals td.points { width: 30px; font-weight: bold; text-align:center;}
+#deals td.price { width: 60px; }
 
-
-#deals .vote a, #deals .vote p {
+#deals .vote, #deals .voted {
   display: block;
-  height: 11px;
-  width: 11px;
+  height: 16px;
+  width: 16px;
   margin: 2px;
 }
-.vote_up {background: url(../images/vote_up.png);}
-.vote_down {background: url(../images/vote_down.png);}
-.voted_up {background: url(../images/voted_up.png);}
-.voted_down {background: url(../images/voted_down.png);}
+#deals .vote {background: url(../images/vote.png); opacity: 0.3; filter: alpha(opacity=30);}
+#deals .vote:hover {background: url(../images/vote.png); opacity: 0.8; filter: alpha(opacity=80);}
+#deals .voted {background: url(../images/vote.png);}
+
+/* Deal */
+#deal { margin: 20px 0; width: 600px;}
+#deal p {margin: 5px 0; }
+#deal .description { padding: 10px; border: 1px dashed #000; }

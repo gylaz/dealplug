@@ -1,10 +1,14 @@
+<h1><%= @title = @deal.title %></h1>
 <div id="deal">
-  <h1><%= @deal.title %></h1>
-  <p><%= @deal.price %></p>
-  <p><%= @deal.url %></p>
-  <p><%= @deal.description %></p>
-  <p><%= @deal.user.username %></p>
+  <p><%= link_to "Link", @deal.url %></p>
+  <p><%= number_to_currency(@deal.price) %></p>
+  <p class="description"><%= @deal.description %></p>
 </div>
 
-<%= link_to('Edit', edit_deal_path(@deal)) if can? :update, @deal %>
-<%= link_to('Destroy', @deal, :confirm => 'Are you sure?', :method => :delete) if can? :destroy, @deal %>
+<p>Plugged by: <%= @deal.user.username %> at <%= submitted_ago(@deal) %></p>
+<% if can? :update, @deal %>
+  <%= link_to('Edit', edit_deal_path(@deal)) %>
+<% end %>
+<% if can? :destroy, @deal %>
+  | <%= link_to('Destroy', @deal, :confirm => 'Are you sure?', :method => :delete) %>
+<% end %>

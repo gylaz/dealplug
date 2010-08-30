@@ -1,21 +1,12 @@
 <table id="deals">
 <% @deals.each do |deal| %>
   <tr>
-    <td class="vote">
-      <% vote = deal.user_vote(current_user) %>
-      <% if vote %>
-        <% if vote.up %>
-          <p class="voted_up"></p>
-          <%= link_to "", vote, :method => :put, :class => "vote_down" %>
-        <% else%>
-          <%= link_to "", vote, :method => :put, :class => "vote_up" %>
-          <p class="voted_down"></p>
-        <% end %>
+    <td class="action">
+      <% if deal.user_vote(current_user) %> 
+        <p class="voted"></p>
       <% else %>
-        <%= link_to "", votes_path(Vote.new, :deal_id => deal.id, :up => true),
-          :method => :post, :class => "vote_up" %>
-        <%= link_to "", votes_path(Vote.new, :deal_id => deal.id, :up => false),
-          :method => :post, :class => "vote_down" %>
+        <%= link_to "", votes_path(:user_id => current_user, :deal_id => deal.id),
+          :method => :post, :class => "vote" %>
       <% end %>
     </td>
     <td class="points"><%= deal.points %></td>
@@ -27,3 +18,4 @@
   </tr>
 <% end %>
 </table>
+<%= will_paginate @deals, :separator => " | " %>

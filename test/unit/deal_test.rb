@@ -36,6 +36,13 @@ class DealTest < ActiveSupport::TestCase
   end
   
   test "user vote" do
+    deal = deals(:three)
+    assert_nil deal.user_vote(users(:user1))
     
+    Vote.create(:deal => deal, :user => users(:admin))
+    assert_nil deal.user_vote(users(:user1))
+
+    vote = Vote.create(:deal => deal, :user => users(:user1))
+    assert_equal vote, deal.user_vote(users(:user1))
   end
 end
