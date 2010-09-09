@@ -24,11 +24,11 @@ test:
   socket: /tmp/mysql.sock
 
 production:
-  adapter: sqlite3
+  adapter: mysql2
   encoding: utf8
   reconnect: false
   database: dealplug
   pool: 5
   username: root
-  password:
+  password: d3alplug
   socket: /tmp/mysql.sock
