@@ -31,22 +31,16 @@ form label {font-size: 14px; font-weight:bold;}
 /* Navigation */
 #nav {
   padding: 5px 10px;
-  background-color: #eee;
+  background-color: #ddd;
   border:1px solid #ddd;
   text-align: right;
   font-size: 15px;
-  -moz-border-radius: 8px;
-  -webkit-border-radius: 8px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
   margin-bottom:10px;
 }
 
-/* Tabs */
-ul.tabs { float: left; }
-ul.tabs li {
-  float: left;
-  padding: 0 5px;
-  border-right: 1px solid #000;
-}
+#links { float: left; }
 
 #submit_deal {margin-right: 10px;}
 /* Deals */

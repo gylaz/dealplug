@@ -1,6 +1,6 @@
 <h1><%= @title = @deal.title %></h1>
 <div id="deal">
-  <p><%= link_to "Link", @deal.url %></p>
+  <p><%= link_to "Link", @deal.url, :target => "_blank" %></p>
   <p><%= number_to_currency(@deal.price) %></p>
   <p class="description"><%= @deal.description %></p>
 </div>
