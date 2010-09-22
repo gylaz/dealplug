@@ -1,7 +1,10 @@
-<h1><%= @title = @deal.title %></h1>
+<h2><%= @title = @deal.title %></h2>
 <div id="deal">
-  <p><%= link_to "Link", @deal.url, :target => "_blank" %></p>
-  <p><%= number_to_currency(@deal.price) %></p>
+  <p>
+    <%= link_to "Link to deal", @deal.url, :target => "_blank" %> 
+    @
+    <%= number_to_currency(@deal.price) %>
+  </p>
   <p class="description"><%= @deal.description %></p>
 </div>
 
