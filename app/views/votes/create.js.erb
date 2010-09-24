@@ -1,0 +1,4 @@
+$('#deal<%= @deal.id %>').fadeOut('fast', function() {
+  $('#deal<%= @deal.id %>').html('<%= escape_javascript(render @deal) %>');
+});
+$('#deal<%= @deal.id %>').fadeIn(500);

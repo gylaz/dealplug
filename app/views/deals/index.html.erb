@@ -1,20 +1,7 @@
 <table id="deals">
 <% @deals.each do |deal| %>
-  <tr>
-    <td class="action">
-      <% if deal.user_vote(current_user) %> 
-        <p class="voted"></p>
-      <% else %>
-        <%= link_to "", votes_path(:user_id => current_user, :deal_id => deal.id),
-          :method => :post, :class => "vote" %>
-      <% end %>
-    </td>
-    <td class="points"><%= deal.points %></td>
-    <td class="price"><%= number_to_currency(deal.price) %></td>
-    <td class="title">
-      <p><%= link_to deal.title, deal %></p>
-      <p class="small_text">Plugged by: <%= deal.user.username %> at <%= submitted_ago(deal) %></p>
-    </td>
+  <tr id="deal<%= deal.id %>">
+    <%= render :partial => deal %>
   </tr>
 <% end %>
 </table>

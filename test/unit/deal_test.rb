@@ -8,6 +8,7 @@ class DealTest < ActiveSupport::TestCase
     assert_equal 7, deal.errors.size
     assert_not_nil deal.errors[:title]
     assert_not_nil deal.errors[:description]
+    assert deal.votes.empty?
     
     deal = Deal.new(:title => "Test", :url => "", :price => "99",
       :description => "this is a test that is longer than 20 characters")
@@ -15,12 +16,14 @@ class DealTest < ActiveSupport::TestCase
     assert_equal 3, deal.errors.size
     assert_not_nil deal.errors[:user]
     assert_not_nil deal.errors[:url]
+    assert deal.votes.empty?
     
     deal = Deal.new(:title => "Test", :url => "http://test", :price => "99", :points => 999,
       :description => "This is a test that is longer than 20 characters")
     deal.user = users(:admin)
     assert deal.save
     assert_equal 1, deal.points
+    assert_equal 1, deal.votes.size
   end
   
   test "format url" do
@@ -35,14 +38,11 @@ class DealTest < ActiveSupport::TestCase
     assert_equal "https://new", deal.url
   end
   
-  test "user vote" do
+  test "vote gets assigned correctly" do
     deal = deals(:three)
-    assert_nil deal.user_vote(users(:user1))
-    
-    Vote.create(:deal => deal, :user => users(:admin))
-    assert_nil deal.user_vote(users(:user1))
+    assert_equal votes(:three), deal.user_vote(users(:user1))
 
-    vote = Vote.create(:deal => deal, :user => users(:user1))
-    assert_equal vote, deal.user_vote(users(:user1))
+    vote = Vote.create(:deal => deal, :user => users(:admin))
+    assert_equal vote, deal.user_vote(users(:admin))
   end
 end

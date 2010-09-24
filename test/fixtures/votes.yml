@@ -1,1 +1,12 @@
-one: {}
+one:
+  deal: one
+  user: admin
+two:
+  deal: two
+  user: admin 
+three:
+  deal: three
+  user: user1 
+four:
+  deal: four
+  user: user1 
