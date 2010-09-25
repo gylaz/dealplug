@@ -1,10 +1,9 @@
 class VotesController < ApplicationController
-  load_resource :deal
-  load_and_authorize_resource
+  authorize_resource
   
   def create    
-    Vote.create(:user_id => current_user.id, :deal_id => @deal.id)
-    @deal.reload
+    Vote.create(:user_id => current_user.id, :deal_id => params[:deal_id])
+    @deal = Deal.find(params[:deal_id])
   end
   
 end
