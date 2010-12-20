@@ -31,7 +31,7 @@ class SlickdealsParserTest < ActiveSupport::TestCase
   test "parsing good html" do
     results = SlickdealsParser.parse
     assert_equal 1, results.size
-    assert_equal "406874", results.first[:slickdeals_id]
+    assert_equal "2493887", results.first[:slickdeals_id]
     assert_equal "PlayStation 3 160GB Slim Console $199", results.first[:title]
     assert_equal 199, results.first[:price]
     assert_equal "http://www.amazon.com", results.first[:url]

@@ -19,7 +19,7 @@ module SlickdealsParser
 
   private
   def self.parse_page(url)
-    result = { :slickdeals_id => url[/(?<=sduid=)\d*/] }
+    result = { :slickdeals_id => url[/(?<=&t=)\d*/] }
     prefix = 'http://slickdeals.net/forums/'
     doc = Nokogiri::HTML(open(prefix + url))
     result[:title] = doc.css('.firstthread_title').text
@@ -27,7 +27,7 @@ module SlickdealsParser
 
     result[:price] = price_text.delete('$').to_f
     first_post = doc.css('.post_message')
-    result[:description] = first_post.text
+    result[:description] = first_post.inner_html.gsub(/http:\/\/slickdeals.*u2=/, '')
     result[:url] = parse_url(first_post)
     result
   end
