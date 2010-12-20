@@ -6,11 +6,12 @@ class Deal < ActiveRecord::Base
   validates :price, :presence => true
   validates :url, :presence => true, :format => { :with => URI::regexp(%w(http https)) }
   validates :description, :presence => true, :length => { :minimum => 20 }
-  
+  validates :slickdeals_id, :uniqueness => true, :unless => Proc.new { |deal| deal.slickdeals_id.nil? }
+
   scope :latest, :order => "created_at DESC"
   scope :popular, where(:created_at => (DateTime.now - 5)..DateTime.now).order("points DESC")
   
-  attr_accessible :title, :price, :url, :description
+  attr_accessible :title, :price, :url, :description, :slickdeals_id
   before_validation :format_url
   after_create :create_vote
   
@@ -31,5 +32,21 @@ class Deal < ActiveRecord::Base
   def recalculate_points
     sum = votes.where(:deal_id => id).count
     update_attribute(:points, sum)
+  end
+
+  def self.scan_and_populate
+    deals = SlickdealsParser.parse(:score => 15)
+
+    deals.each do |hash|
+      user = User.find_by_username('russianbandit')
+      deal = Deal.new(:title => hash[:title], :slickdeals_id => hash[:slickdeals_id],
+                      :price => hash[:price], :url => hash[:url],
+                      :description => hash[:description])
+      deal.user = user
+      unless deal.save
+        puts deal.title
+        puts deal.errors.full_messages
+      end
+    end
   end
 end

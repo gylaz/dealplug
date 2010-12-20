@@ -45,4 +45,17 @@ class DealTest < ActiveSupport::TestCase
     vote = Vote.create(:deal => deal, :user => users(:admin))
     assert_equal vote, deal.user_vote(users(:admin))
   end
+
+  test "duplicate slickdeals id" do
+    deal = Deal.new(:title => "Test", :url => "test", :price => "99", :slickdeals_id => 1234,
+      :description => "This is a test that is longer than 20 characters")
+    deal.user = users(:admin)
+    assert deal.save
+
+    deal_dup = Deal.new(deal.attributes)
+    deal_dup.user = users(:admin)
+    deal_dup.slickdeals_id = deal.slickdeals_id
+    assert !deal_dup.save
+    assert_equal ["Slickdeals has already been taken"], deal_dup.errors.full_messages
+  end
 end

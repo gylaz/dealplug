@@ -7,6 +7,7 @@ class CreateDeals < ActiveRecord::Migration
       t.string :description
       t.integer :points, :default => 1
       t.integer :user_id
+      t.integer :slickdeals_id
       t.timestamps
     end
   end
