@@ -27,7 +27,7 @@ module SlickdealsParser
 
     result[:price] = price_text.delete('$').to_f
     first_post = doc.css('.post_message')
-    result[:description] = first_post.inner_html.gsub(/http:\/\/slickdeals.*u2=/, '')
+    result[:description] = clean_up_html(first_post.inner_html)
     result[:url] = parse_url(first_post)
     result
   end
@@ -39,5 +39,9 @@ module SlickdealsParser
   def self.parse_url(node)
     url = node.at('.//a').try(:[], 'href')
     url[/http:\/\/(?!slickdeals\.net).+/] if url
+  end
+
+  def self.clean_up_html(html_string)
+    html_string.gsub(/http:\/\/slickdeals.*u2=/, '').gsub(/<!--.*-->/, "")
   end
 end

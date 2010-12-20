@@ -5,7 +5,7 @@
     @
     <%= number_to_currency(@deal.price) %>
   </p>
-  <p class="description"><%= raw @deal.description %></p>
+  <p class="description"><%= sanitize raw(@deal.description) %></p>
 </div>
 
 <p>Plugged by: <%= @deal.user.username %> at <%= submitted_ago(@deal) %></p>
