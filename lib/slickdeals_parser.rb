@@ -42,6 +42,6 @@ module SlickdealsParser
   end
 
   def self.clean_up_html(html_string)
-    html_string.gsub(/http:\/\/slickdeals.*u2=/, '').gsub(/<!--.*-->/, "")
+    html_string.gsub(/http:\/\/slickdeals.*u2=/, '').gsub(/<!--.*-->/, '')
   end
 end

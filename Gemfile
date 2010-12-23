@@ -7,6 +7,7 @@ gem 'devise'
 gem 'cancan'
 gem 'will_paginate', '>= 3.0.pre2'
 gem 'nokogiri'
+gem 'capistrano'
 
 group :test do
   gem 'autotest-standalone'
