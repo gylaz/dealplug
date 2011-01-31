@@ -1,7 +1,6 @@
 source 'http://rubygems.org'
 
 gem 'rails'
-#gem 'mysql2'
 gem 'sqlite3-ruby'
 gem 'devise'
 gem 'cancan'
@@ -9,8 +8,11 @@ gem 'will_paginate', '>= 3.0.pre2'
 gem 'nokogiri'
 gem 'capistrano'
 
-group :test do
+group :test, :development do
   gem 'autotest-standalone'
   gem 'autotest-rails-pure'
   gem 'webmock'
+  gem 'shoulda'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end

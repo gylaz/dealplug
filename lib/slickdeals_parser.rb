@@ -19,7 +19,8 @@ module SlickdealsParser
 
   private
   def self.parse_page(url)
-    result = { :slickdeals_id => url[/(?<=&t=)\d*/] }
+    # result = { :slickdeals_id => url[/(?<=&t=)\d*/] } # look behind only supported on 1.9.2
+    result = { :slickdeals_id => url[/&t=\d*/].delete('&t=') }
     prefix = 'http://slickdeals.net/forums/'
     doc = Nokogiri::HTML(open(prefix + url))
     result[:title] = doc.css('.firstthread_title').text

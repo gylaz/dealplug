@@ -1,1 +1,6 @@
 DealPlug
+
+* Cron Setup *
+Cron can be setup to run the parsing task
+Example (runs parse every 10 minutes in production):
+*/10 * * * * cd /path/to/project && /path/to/rakee parse:slickdeals RAILS_ENV=production

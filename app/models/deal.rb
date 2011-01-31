@@ -1,10 +1,12 @@
 class Deal < ActiveRecord::Base
+  URL_FORMAT = /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/ix
+
   belongs_to :user
   has_many :votes
   validates :user, :presence => true
   validates :title, :presence => true
   validates :price, :presence => true
-  validates :url, :presence => true, :format => { :with => URI::regexp(%w(http https)) }
+  validates :url, :presence => true, :format => { :with => URL_FORMAT }
   validates :description, :presence => true, :length => { :minimum => 20 }
   validates :slickdeals_id, :uniqueness => true, :unless => Proc.new { |deal| deal.slickdeals_id.nil? }
 
@@ -41,7 +43,8 @@ class Deal < ActiveRecord::Base
       user = User.find_by_username('russianbandit')
       next if Deal.find_by_slickdeals_id(hash[:slickdeals_id])
 
-      deal = Deal.new(:title => hash[:title], :slickdeals_id => hash[:slickdeals_id],
+      deal = Deal.new(:title => hash[:title],
+                      :slickdeals_id => hash[:slickdeals_id],
                       :price => hash[:price], :url => hash[:url],
                       :description => hash[:description])
       deal.user = user
