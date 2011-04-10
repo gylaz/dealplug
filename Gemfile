@@ -4,7 +4,7 @@ gem 'rails'
 gem 'sqlite3-ruby'
 gem 'devise'
 gem 'cancan'
-gem 'will_paginate', '>= 3.0.pre2'
+gem 'will_paginate'
 gem 'nokogiri'
 gem 'capistrano'
 

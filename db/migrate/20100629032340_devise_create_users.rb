@@ -6,6 +6,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string  :username
       t.integer :points, :default => 0
       t.boolean :admin, :default => false
+      t.encryptable
       # t.rememberable
       # t.trackable
       # t.confirmable

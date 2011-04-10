@@ -20,11 +20,13 @@ class Deal < ActiveRecord::Base
   def create_vote
     Vote.create(:deal_id => id, :user_id => user.id)
   end
+
+  def has_valid_url?
+    url.starts_with?("http://") or url.starts_with?("https://")
+  end
   
   def format_url
-    unless url.blank? or url.starts_with?("http://") or url.starts_with?("https://")
-      self.url = "http://" + url
-    end
+    self.url = "http://#{url}" unless url.blank? || has_valid_url?
   end
   
   def user_vote(user)
@@ -40,14 +42,13 @@ class Deal < ActiveRecord::Base
     deals = SlickdealsParser.parse(:score => 15)
 
     deals.each do |hash|
-      user = User.find_by_username('russianbandit')
       next if Deal.find_by_slickdeals_id(hash[:slickdeals_id])
 
       deal = Deal.new(:title => hash[:title],
                       :slickdeals_id => hash[:slickdeals_id],
                       :price => hash[:price], :url => hash[:url],
                       :description => hash[:description])
-      deal.user = user
+      deal.user = User.find_by_username('russianbandit')
       unless deal.save
         puts deal.title
         puts deal.errors.full_messages
