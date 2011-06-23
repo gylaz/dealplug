@@ -11,7 +11,7 @@ class Deal < ActiveRecord::Base
   validates :slickdeals_id, :uniqueness => true, :unless => Proc.new { |deal| deal.slickdeals_id.nil? }
 
   scope :latest, :order => "created_at DESC"
-  scope :popular, where(:created_at => (DateTime.now - 5)..DateTime.now).order("points DESC")
+  scope :popular, where(:created_at => (DateTime.now - 5)..Time.now).order("points DESC")
   
   attr_accessible :title, :price, :url, :description, :slickdeals_id
   before_validation :format_url
