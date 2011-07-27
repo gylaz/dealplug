@@ -19,6 +19,8 @@ class Deal < ActiveRecord::Base
   
   def create_vote
     Vote.create(:deal_id => id, :user_id => user.id)
+    recalculate_points
+    user.recalculate_points
   end
 
   def has_valid_url?

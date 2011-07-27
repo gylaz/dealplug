@@ -22,14 +22,14 @@ describe Deal do
     it           { should have(1).vote }
   end
 
-  context "when validation fails" do
+  context "with duplicate slickeals_id" do
+    subject { Factory.build(:deal,:user => deal.user,:slickdeals_id => "12345") }
+
     before do
-      deal.slickdeals_id = "12345"
-      deal.save
+      deal.update_attribute(:slickdeals_id, "12345")
       subject.save
     end
 
-    subject {Factory.build(:deal,:user => deal.user,:slickdeals_id => "12345")}
     it { should_not be_valid }
     it { should have(0).vote }
     its(:errors) { should == {:slickdeals_id => ["has already been taken"]} }
@@ -56,6 +56,27 @@ describe Deal do
     context "when a user hasn't voted" do
       subject { deal.user_vote(Factory.build :user, :username => "test") }
       it { should be_nil }
+    end
+  end
+
+  describe "#create_vote" do
+    before do
+      deal.stub!(:user).and_return(
+        double(:id => "another_user", :recalculate_points => true))
+    end
+
+    it "calls recalculating methods" do
+      deal.should_receive(:recalculate_points)
+      deal.user.should_receive(:recalculate_points)
+      deal.create_vote
+    end
+
+    it "creates a new vote" do
+      expect { deal.create_vote }.to change{ deal.votes.size }.by(1)
+    end
+
+    it "updates deal points" do
+      expect { deal.create_vote }.to change{ deal.points }.by(1)
     end
   end
 

@@ -9,3 +9,8 @@ Factory.define :deal do |f|
   f.description  'Text that is long enough'
   f.association  :user
 end
+
+Factory.define :vote do |f|
+  f.user_id 1
+  f.deal_id 100
+end

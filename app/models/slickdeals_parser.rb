@@ -1,6 +1,6 @@
 require 'open-uri'
 
-module SlickdealsParser
+class SlickdealsParser
 
   def self.parse args = {}
     results = []

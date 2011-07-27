@@ -28,7 +28,7 @@ GEM
       activemodel (= 3.0.6)
       activesupport (= 3.0.6)
     activesupport (3.0.6)
-    addressable (2.2.5)
+    addressable (2.2.6)
     arel (2.0.9)
     autotest-rails-pure (4.1.2)
     autotest-standalone (4.5.5)
