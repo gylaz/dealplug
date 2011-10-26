@@ -12,6 +12,10 @@ set :user, "root"
 set :use_sudo,     false
 
 namespace :deploy do
+  task :symlink do
+    run "ln -nsf #{shared_path}/production.sqlite3 #{release_path}/db/production.sqlite3"
+  end
+
   task :restart do
     run "touch #{current_release}/tmp/restart.txt"
   end
