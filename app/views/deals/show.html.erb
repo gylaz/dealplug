@@ -8,7 +8,7 @@
   <p class="description"><%= sanitize raw(@deal.description) %></p>
 </div>
 
-<p>Plugged by: <%= @deal.user.username %> at <%= submitted_ago(@deal) %></p>
+<p><%= submitted_by_text @deal %></p>
 <% if can? :update, @deal %>
   <%= link_to('Edit', edit_deal_path(@deal)) %>
 <% end %>

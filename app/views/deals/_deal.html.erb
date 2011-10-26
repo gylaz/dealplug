@@ -10,5 +10,5 @@
 <td class="price"><%= number_to_currency(deal.price) %></td>
 <td class="title">
   <p><%= link_to deal.title, deal %></p>
-  <p class="small_text">Plugged by: <%= deal.user.username %> at <%= submitted_ago(deal) %></p>
+  <p class="small_text"><%= submitted_by_text @deal %></p>
 </td>
