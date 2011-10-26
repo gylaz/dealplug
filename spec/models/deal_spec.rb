@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Deal do
-  let(:deal) { Factory(:deal, :user => Factory.build(:user)) }
+  let(:deal) { Factory(:deal) }
 
   it { should belong_to(:user)}
   it { should have_many(:votes)}
@@ -18,7 +18,7 @@ describe Deal do
 
   context "creation" do
     its(:errors) { should be_empty }
-    its(:points) { should == 1 }
+    its(:points) { should == 0 }
     it           { should have(1).vote }
   end
 
@@ -60,23 +60,21 @@ describe Deal do
   end
 
   describe "#create_vote" do
-    before do
-      deal.stub!(:user).and_return(
-        double(:id => "another_user", :recalculate_points => true))
-    end
+    let(:deal) { Factory.build(:deal) }
 
-    it "calls recalculating methods" do
-      deal.should_receive(:recalculate_points)
-      deal.user.should_receive(:recalculate_points)
-      deal.create_vote
+    it "gets called on create callback" do
+      deal.should_receive(:create_vote)
+      deal.save
     end
 
     it "creates a new vote" do
-      expect { deal.create_vote }.to change{ deal.votes.size }.by(1)
+      deal.save
+      deal.should have(1).vote
     end
 
     it "updates deal points" do
-      expect { deal.create_vote }.to change{ deal.points }.by(1)
+      deal.save
+      deal.reload.points.should == 1
     end
   end
 

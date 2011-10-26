@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
   let(:user) { Factory(:user) }
-  subject { user }
+  subject { user.reload }
 
   it { should have_many(:deals)}
   it { should validate_presence_of(:username) }
@@ -14,18 +14,17 @@ describe User do
   end
 
   describe "#recalculate_points" do
-    before {
-      Factory(:deal, :user => user)
-      user.recalculate_points
-    }
-    its(:points) { should == 1 }
-    
-    context "with another deal" do
+    context "with several deals" do
       before {
-        Factory(:deal, :user => user, :points => 3)
-        user.recalculate_points
+        Factory(:deal, :user => user)
+        Factory(:deal, :user => user)
       }
-      its(:points) { should == 4 }
+      its(:points) { should == 2 }
+    end
+
+    context "and can't force points" do
+      before { Factory(:deal, :user => user, :points => 5) }
+      its(:points) { should == 1 }
     end
   end
 end

@@ -19,8 +19,6 @@ class Deal < ActiveRecord::Base
   
   def create_vote
     Vote.create(:deal_id => id, :user_id => user.id)
-    recalculate_points
-    user.recalculate_points
   end
 
   def has_valid_url?
@@ -36,8 +34,7 @@ class Deal < ActiveRecord::Base
   end
   
   def recalculate_points
-    sum = votes.where(:deal_id => id).count
-    update_attribute(:points, sum)
+    update_attribute(:points, votes.size)
   end
 
   def self.scan_and_populate

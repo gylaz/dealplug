@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(:version => 20110410204930) do
     t.string   "url"
     t.float    "price"
     t.string   "description"
-    t.integer  "points",        :default => 1
+    t.integer  "points",        :default => 0
     t.integer  "user_id"
     t.integer  "slickdeals_id"
     t.datetime "created_at"

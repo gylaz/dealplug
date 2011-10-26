@@ -1,16 +1,18 @@
-Factory.define :user do |f|
-  f.username   'user'
-end
+FactoryGirl.define do
+  factory :user do
+    sequence(:username) { |n| "user#{n}" }
+  end
 
-Factory.define :deal do |f|
-  f.title        'New Deal'
-  f.price        25
-  f.url          'http://amazon.com'
-  f.description  'Text that is long enough'
-  f.association  :user
-end
+  factory :deal do
+    title       'New Deal'
+    price       25
+    url         'http://amazon.com'
+    description 'Text that is long enough'
+    user
+  end
 
-Factory.define :vote do |f|
-  f.user_id 1
-  f.deal_id 100
+  factory :vote do
+    deal
+    user
+  end
 end

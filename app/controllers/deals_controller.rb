@@ -3,6 +3,7 @@ class DealsController < ApplicationController
   load_and_authorize_resource
   
   def index
+    @page = params[:page] || 1
     if params[:popular]
       @deals = Deal.popular.paginate(:page => params[:page], :per_page => 20)
     else
@@ -14,16 +15,10 @@ class DealsController < ApplicationController
     end
   end
 
-  def show
-  end
-
   def new
     @deal.url = "http://"
   end
 
-  def edit
-  end
-  
   def create
     @deal.user = current_user
     @deal.points = 1
