@@ -12,7 +12,7 @@ set :user, "root"
 set :use_sudo,     false
 
 namespace :deploy do
-  task :symlink do
+  task :symlink_db do
     run "ln -nsf #{shared_path}/production.sqlite3 #{release_path}/db/production.sqlite3"
   end
 
@@ -20,3 +20,5 @@ namespace :deploy do
     run "touch #{current_release}/tmp/restart.txt"
   end
 end
+
+after 'deploy:symlink', 'deploy:symlink_db'
